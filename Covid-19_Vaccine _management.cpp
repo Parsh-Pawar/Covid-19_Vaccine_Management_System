@@ -1,4 +1,4 @@
-// COVID19 MANAGEMENT SYSTEM USING FILE HANDLING IN CPP - (Sagar Developer)
+// COVID19 MANAGEMENT SYSTEM USING FILE HANDLING IN CPP 
 
 // HEADER FILES
 #include <iostream>
@@ -200,7 +200,7 @@ void covid_management::admin_password()
     cout << "\n\n\t\tCaptcha: " << capt;
     cout << "\n\n\t\tEnter Valid Captcha: ";
     cin >> capta;
-    if ((strcmp(a_name, "sagar") == 0) && (strcmp(a_password, "pr123j") == 0) && (capt == capta))
+    if ((strcmp(a_name, "Parsh") == 0) && (strcmp(a_password, "Parsh@123") == 0) && (capt == capta))
     {
         cout << "\n\n\n\t\t\t\t\t| Verfiying ADMIN |\n\t\t\t\t\t";
         for (int a = 1; a < 8; a++)
