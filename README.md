@@ -6,7 +6,7 @@
 
 
 For Admin
-Username: "Parsh"
 
+Username: "Parsh"
 
 Password: "Parsh@123"
