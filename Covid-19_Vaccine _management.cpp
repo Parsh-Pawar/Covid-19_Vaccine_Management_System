@@ -1,6 +1,3 @@
-// COVID19 MANAGEMENT SYSTEM USING FILE HANDLING IN CPP 
-
-// HEADER FILES
 #include <iostream>
 #include <cstring>
 #include <windows.h>
@@ -11,6 +8,7 @@
 #include <string>
 #include <unistd.h>
 #define TOTAL_VACCINE 400
+
 using namespace std;
 
 class covid_management
@@ -24,10 +22,11 @@ protected:
     string center1 = "1center";
     string center2 = "2center";
     string center3 = "3center";
-    int sum_vaccine_c1 = 0; // Center1 vaccine Dose
-    int sum_vaccine_c2 = 0; // Center2 vaccine Dose
-    int sum_vaccine_c3 = 0; // Center3 vaccine Dose
-    int add, center_no;
+    int sum_vaccine_c1 = 0; 
+    int sum_vaccine_c2 = 0; 
+    int sum_vaccine_c3 = 0; 
+    int add,remove, center_no;
+    
     // For Doctor Details
     string identification_id;
     char specialization[100];
@@ -47,7 +46,7 @@ public:
     void admin_password();
     void user();
     void user_password();
-    void valid(string str); // For Valid Username Or not
+    void valid(string str); 
 
     // For ADMIN
     void add_vaccine_stock();     // 1
@@ -55,20 +54,16 @@ public:
     void show_patient_data();     // 4
     void show_data();             // 4-a
     void applied_vaccine();       // 5
-    void add_doctor();            // 6
-    void search_doctor_data();    // 7
+    void add_doctor();            // 6   
     void display_doctor_data();   // 8
     void doctor_show_data();      // 8-a
-    void search_by_aadhar();      // 4-a(1)
-    void search_by_age();         // 4-a(2)
-    void search_by_profession();  // 4-a(3)
-    void search_by_gender();      // 4-a(4)
+    void remove_vaccine_stock();
 
     // FOR USER
-    void search_center();       // 1
-    void add_patient_data();    // 2
-    void patient_show_data();   // 3
-    void update_patient_data(); // 4
+    void search_center();      
+    void add_patient_data();   
+    void patient_show_data();  
+    void update_patient_data();
 };
 
 void covid_management::menu()
@@ -96,7 +91,7 @@ void covid_management::menu()
         break;
     case 3:
         system("cls");
-        cout << "\n\n\t\t\t COVID19 MANAGEMENT SYSTEM - BY SAGAR DEVELOPER";
+        cout << "\n\n\t\t\t COVID19 MANAGEMENT SYSTEM - BY Parsh Pawar";
         Sleep(10);
         exit(0);
     default:
@@ -104,8 +99,9 @@ void covid_management::menu()
         cout << "\n\n Press Any Key To Continue: ";
         getch();
         menu();
-    }
 }
+    }
+    
 
 void covid_management::admin()
 {
@@ -117,38 +113,39 @@ A:
     cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
     cout << "\n\t\t\t\t*****************************************";
     // ADMIN MENU OPTIONS
-    cout << "\n\n\t\t -->> ADMIN MENU <<--";
-    cout << "\n\n\t\t 1. Add Vaccine Stock";
-    cout << "\n\t\t 2. Show Vaccine Center";
-    cout << "\n\t\t 3. Show Vaccine Stock";
-    cout << "\n\t\t 4. Show Patient Data";
-    cout << "\n\t\t 5. Show Total Number Of Vaccines Applied";
+     cout << "\n\n\t\t -->> ADMIN MENU <<--";
+    cout << "\n\n\t\t 1. Show Vaccine Center";
+    cout << "\n\t\t 2. Show Vaccine Stock";
+    cout << "\n\t\t 3. Add Vaccine Stock";
+    cout << "\n\t\t 4. Remove Vaccine Stock";
+    cout << "\n\t\t 5. Show Patient Data";
     cout << "\n\t\t 6. Add New Doctor Data";
-    cout << "\n\t\t 7. Search Doctor Data";
-    cout << "\n\t\t 8. Show Doctor Data";
+    cout << "\n\t\t 7. Show Doctor Data";
+    cout << "\n\t\t 8. Show Total Number Of Vaccines Applied"; 
     cout << "\n\t\t 9. LOG OUT";
     cout << "\n\n\t\tEnter Choice: ";
     cin >> admin_choice;
     switch (admin_choice)
     {
     case 1:
-        add_vaccine_stock();
-        goto A;
-        break;
-    case 2:
         search_center();
         goto A;
         break;
-    case 3:
+    case 2:
         display_vaccine_stock();
         goto A;
         break;
+
+    case 3:
+        add_vaccine_stock();
+        goto A;
+        break;
     case 4:
-        show_patient_data();
+        remove_vaccine_stock();
         goto A;
         break;
     case 5:
-        applied_vaccine();
+        show_patient_data();
         goto A;
         break;
     case 6:
@@ -156,11 +153,11 @@ A:
         goto A;
         break;
     case 7:
-        search_doctor_data();
+        display_doctor_data();
         goto A;
         break;
     case 8:
-        display_doctor_data();
+        applied_vaccine();
         goto A;
         break;
     case 9:
@@ -203,10 +200,10 @@ void covid_management::admin_password()
     if ((strcmp(a_name, "Parsh") == 0) && (strcmp(a_password, "Parsh@123") == 0) && (capt == capta))
     {
         cout << "\n\n\n\t\t\t\t\t| Verfiying ADMIN |\n\t\t\t\t\t";
-        for (int a = 1; a < 8; a++)
+        for (int a = 1; a < 20; a++)
         {
-            Sleep(500);
-            cout << "...";
+            Sleep(180);
+            cout << ".";
         }
         cout << "\n\nAccess Granted..\n\n";
         system("PAUSE");
@@ -215,11 +212,13 @@ void covid_management::admin_password()
     else
     {
         cout << "\n\n\n\t\t\t\t\t| Verfiying ADMIN |\n\t\t\t\t\t";
-        for (int a = 1; a < 8; a++)
+        for (int a = 1; a < 20; a++)
         {
-            Sleep(500);
-            cout << "...";
+            Sleep(180);
+            cout << ".";
         }
+        cout << "\n\nInvalid Admin Login...";
+        Sleep(1000);
         cout << "\n\nAccess Aborted...\n\n";
         system("PAUSE");
         system("cls");
@@ -261,7 +260,7 @@ B:
         update_patient_data();
         goto B;
     case 5:
-        menu();
+         user();
     default:
         cout << "\n\n\t\tInvalid Choice.. Please Try Again..\n";
         cout << "\n\nPress Any Key To Continue..";
@@ -272,7 +271,7 @@ B:
 
 // USER REGISTRATION AND LOGIN
 
-void covid_management::valid(string str) // Check Username is available or not
+void covid_management::valid(string str) 
 {
     string dir, user;
     ifstream file;
@@ -337,9 +336,9 @@ void covid_management::user_password()
         cin >> password;
         fname = usn + ".txt";
         fileo.open(fname.c_str());
-        fileo << usn << endl
-              << username << endl
-              << password << endl;
+        fileo <<"User: " << username<< endl
+              << "Username: "<< usn  << endl
+              << "Password: "<<password << endl;
         cout << "\nYou are successfully registered:)";
         cout << "\n\nPress Any Key To Continue..";
         Sleep(500);
@@ -367,6 +366,7 @@ void covid_management::user_password()
             cout << "\nYou are not registered, please register before logging in.\n";
             filei.close();
             getch();
+            Sleep(1000);
             user_password();
         }
         getline(filei, usern);
@@ -389,7 +389,7 @@ void covid_management::user_password()
         cout << "\n\n\t\t\t Invalid Choice... Please Try Again....";
         cout << "\n\n Press Any Key To Continue: ";
         getch();
-        user_password();
+         user();
     }
 }
 
@@ -416,8 +416,9 @@ A:
         cout << "\n\t\t -->> For Center 1 <<--";
         cout << "\n\tEnter Number Of Vaccines You Want To Add: ";
         cin >> add;
+        
         sum_vaccine_c1 = sum_vaccine_c1 + add;
-        file << sum_vaccine_c1;
+        file <<"No. of Vaccines in Center 1:"<<sum_vaccine_c1<<endl;
         file.close();
         cout << "\n\n\tVaccine In Center: " << sum_vaccine_c1;
         cout << "\n\n\t\tSUCCESSFULLY ADDED VACCINES TO THE CENTER";
@@ -432,8 +433,10 @@ A:
         cout << "\n\t\t -->> For Center 2 <<--";
         cout << "\n\tEnter Number Of Vaccines You Want To Add: ";
         cin >> add;
+        
         sum_vaccine_c2 = sum_vaccine_c2 + add;
-        file << sum_vaccine_c2;
+        cout<<sum_vaccine_c2<<endl;
+        file << "No. of Vaccines in Center 2:"<<sum_vaccine_c2<<endl;
         file.close();
         cout << "\n\n\tVaccine In Center: " << sum_vaccine_c2;
         cout << "\n\n\t\tSUCCESSFULLY ADDED VACCINES TO THE CENTER";
@@ -448,8 +451,9 @@ A:
         cout << "\n\t\t -->> For Center 3 <<--";
         cout << "\n\tEnter Number Of Vaccines You Want To Add: ";
         cin >> add;
+       
         sum_vaccine_c3 = sum_vaccine_c3 + add;
-        file << sum_vaccine_c3;
+        file << "No. of Vaccines in Center 1:"<<sum_vaccine_c3<<endl;
         file.close();
         cout << "\n\n\tVaccine In Center: " << sum_vaccine_c3;
         cout << "\n\n\t\tSUCCESSFULLY ADDED VACCINES TO THE CENTER";
@@ -468,6 +472,79 @@ A:
         break;
     }
 }
+void covid_management::remove_vaccine_stock()
+{
+A:
+    fstream file;
+    system("cls");
+    cout << "\n\t\t\t\t*****************************************";
+    cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
+    cout << "\n\t\t\t\t*****************************************";
+    cout << "\n\n\t\t-->> Remove VACCINE IN CENTER <<--";
+    cout << "\n\n\t\t1. " << center1 << "\t\t2. " << center2;
+    cout << "\n\n\t\t3. " << center3 << "\t\t4. BACK";
+    cout << "\n\t\tEnter Choice: ";
+    cin >> center_no;
+    switch (center_no)
+    {
+    case 1:
+    {
+        file.open("center1.txt", ios::app);
+        cout << "\n\t\t -->> For Center 1 <<--";
+        cout << "\n\tEnter Number Of Vaccines You Want To remove: ";
+        cin >> remove;
+        sum_vaccine_c1 = sum_vaccine_c1 - remove;
+        file << "No. of Vaccines in Center 1:"<<sum_vaccine_c1<<endl;;
+        file.close();
+        cout << "\n\n\tVaccine In Center: " << sum_vaccine_c1;
+        cout << "\n\n\t\tSUCCESSFULLY REMOVED VACCINES TO THE CENTER";
+        cout << "\n\n\nPress Any Key To Continue..";
+        getch();
+        goto A;
+        break;
+    }
+    case 2:
+    {
+        file.open("center2.txt", ios::app);
+        cout << "\n\t\t -->> For Center 2 <<--";
+        cout << "\n\tEnter Number Of Vaccines You Want To Remove: ";
+        cin >> remove;
+        sum_vaccine_c2 = sum_vaccine_c2 - remove;
+        file <<"No. of Vaccines in Center 2:"<< sum_vaccine_c2<<endl;
+        file.close();
+        cout << "\n\n\tVaccine In Center: " << sum_vaccine_c2;
+        cout << "\n\n\t\tSUCCESSFULLY REMOVED VACCINES TO THE CENTER";
+        cout << "\n\n\nPress Any Key To Continue..";
+        getch();
+        goto A;
+        break;
+    }
+    case 3:
+    {
+        file.open("center3.txt", ios::app);
+        cout << "\n\t\t -->> For Center 3 <<--";
+        cout << "\n\tEnter Number Of Vaccines You Want To Remove: ";
+        cin >> remove;
+        sum_vaccine_c3 = (sum_vaccine_c3 - remove);
+        file << "No. of Vaccines in Center 3:"<<sum_vaccine_c3<<endl;
+        file.close();
+        cout << "\n\n\tVaccine In Center: " << sum_vaccine_c3;
+        cout << "\n\n\t\tSUCCESSFULLY REMOVED VACCINES TO THE CENTER";
+        cout << "\n\n\nPress Any Key To Continue..";
+        getch();
+        goto A;
+        break;
+    }
+    case 4:
+        break;
+    default:
+        cout << "\n\n\t\t\t Invalid Choice... Please Try Again....";
+        cout << "\n\n Press Any Key To Continue: ";
+        getch();
+        remove_vaccine_stock();
+        break;
+    }
+}
 
 void covid_management::search_center()
 {
@@ -481,6 +558,7 @@ void covid_management::search_center()
     if (!file)
     {
         cout << "\nFile Not Found ";
+        
     }
     else
     {
@@ -711,187 +789,6 @@ void covid_management::doctor_show_data()
     cout << setfill(' ') << center;
 }
 
-void covid_management::search_doctor_data()
-{
-B:
-    system("cls");
-    int choice;
-    cout << "\n\t\t\t\t*****************************************";
-    cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
-    cout << "\n\t\t\t\t*****************************************";
-    cout << "\n\n\t\t-->> SEARCH DOCTOR DATA <<--";
-    cout << "\n\t\t1. Search Data By Aadhar \t\t\t2. Search Data BY Identification ID" << endl;
-    cout << "\n\t\t3. Search Data By Center \t\t\t4. Search Data By Gender" << endl;
-    cout << "\n\t\t5. EXIT";
-    cout << "\n\n\t\tEnter Choice: ";
-    cin >> choice;
-    switch (choice)
-    {
-    case 1:
-    {
-        int count = 0;
-        string sadhaar;
-        ifstream file;
-        file.open("Doctor_Data.dat", ios::in | ios::binary);
-        system("cls");
-        cout << "\n\t\t\t\t*****************************************";
-        cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
-        cout << "\n\t\t\t\t*****************************************";
-        cout << "\n\n\t\t-->> SEARCH DOCTOR DATA BY AADHAR <<--";
-        cout << "\n\n\t\tEnter Aadhar No.: ";
-        cin >> sadhaar;
-        if (!file)
-        {
-            cout << "\nFile Not Found!";
-        }
-        else
-        {
-            file.read((char *)this, sizeof(covid_management));
-        }
-        while (!file.eof())
-        {
-            if (sadhaar.compare(adhaar) == 0)
-            {
-                count++;
-                doctor_show_data();
-            }
-            file.read((char *)this, sizeof(covid_management));
-        }
-        if (count == 0)
-        {
-            cout << "\nRecord Not Found!";
-        }
-        file.close();
-        cout << "\n\nPress Any Key To Continue..";
-        getch();
-        goto B;
-    }
-    case 2:
-    {
-        int count = 0;
-        string sidentification_id;
-        ifstream file;
-        file.open("Doctor_Data.dat", ios::in | ios::binary);
-        system("cls");
-        cout << "\n\t\t\t\t*****************************************";
-        cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
-        cout << "\n\t\t\t\t*****************************************";
-        cout << "\n\n\t\t-->> SEARCH DOCTOR DATA BY Identification ID <<--";
-        cout << "\n\n\t\tEnter Identification ID: ";
-        cin >> sidentification_id;
-        if (!file)
-        {
-            cout << "\nFile Not Found!";
-        }
-        else
-        {
-            file.read((char *)this, sizeof(covid_management));
-        }
-        while (!file.eof())
-        {
-            if (sidentification_id == identification_id)
-            {
-                count++;
-                doctor_show_data();
-            }
-            file.read((char *)this, sizeof(covid_management));
-        }
-        if (count == 0)
-        {
-            cout << "\nRecord Not Found!";
-        }
-        file.close();
-        cout << "\n\nPress Any Key To Continue..";
-        getch();
-        goto B;
-    }
-    case 3:
-    {
-        int count = 0;
-        string scenter;
-        ifstream file;
-        file.open("Doctor_Data.dat", ios::in | ios::binary);
-        system("cls");
-        cout << "\n\t\t\t\t*****************************************";
-        cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
-        cout << "\n\t\t\t\t*****************************************";
-        cout << "\n\n\t\t-->> SEARCH DOCTOR DATA BY CENTER <<--";
-        cout << "\n\n\t\tEnter Center: ";
-        cin >> scenter;
-        if (!file)
-        {
-            cout << "\nFile Not Found!";
-        }
-        else
-        {
-            file.read((char *)this, sizeof(covid_management));
-        }
-        while (!file.eof())
-        {
-            if (scenter.compare(center) == 0)
-            {
-                count++;
-                doctor_show_data();
-            }
-            file.read((char *)this, sizeof(covid_management));
-        }
-        if (count == 0)
-        {
-            cout << "\nRecord Not Found!";
-        }
-        file.close();
-        cout << "\n\nPress Any Key To Continue..";
-        getch();
-        goto B;
-    }
-    case 4:
-    {
-        int count = 0;
-        char sgender[10];
-        ifstream file;
-        file.open("Doctor_Data.dat", ios::in | ios::binary);
-        system("cls");
-        cout << "\n\t\t\t\t*****************************************";
-        cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
-        cout << "\n\t\t\t\t*****************************************";
-        cout << "\n\n\t\t-->> SEARCH DOCTOR DATA BY GENDER <<--";
-        cout << "\n\n\t\tEnter Gender: ";
-        cin >> sgender;
-        if (!file)
-        {
-            cout << "\nFile Not Found!";
-        }
-        else
-        {
-            file.read((char *)this, sizeof(covid_management));
-        }
-        while (!file.eof())
-        {
-            if (strcmp(sgender, gender) == 0)
-            {
-                count++;
-                doctor_show_data();
-            }
-            file.read((char *)this, sizeof(covid_management));
-        }
-        if (count == 0)
-        {
-            cout << "\nRecord Not Found!";
-        }
-        file.close();
-        cout << "\n\nPress Any Key To Continue..";
-        getch();
-        goto B;
-    }
-    case 5:
-        break;
-    default:
-        cout << "\n\n\t\tInvalid Choice.. Please Try Again..";
-        getch();
-        break;
-        goto B;
-    }
-}
 
 void covid_management::applied_vaccine()
 {
@@ -917,42 +814,6 @@ void covid_management::applied_vaccine()
 void covid_management::show_patient_data()
 {
 B:
-    system("cls");
-    int choice;
-    cout << "\n\t\t\t\t*****************************************";
-    cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
-    cout << "\n\t\t\t\t*****************************************";
-    cout << "\n\n\t\t-->> SEARCH PATIENT DATA <<--";
-    cout << "\n\t\t1. Search Data By Aadhar \t\t\t2. Search Data BY  AGE" << endl;
-    cout << "\n\t\t3. Search Data By Profession \t\t\t4. Search Data By Gender" << endl;
-    cout << "\n\t\t5. EXIT";
-    cout << "\n\n\t\tEnter Choice: ";
-    cin >> choice;
-    switch (choice)
-    {
-    case 1:
-        search_by_aadhar();
-        goto B;
-    case 2:
-        search_by_age();
-        goto B;
-    case 3:
-        search_by_profession();
-        goto B;
-    case 4:
-        search_by_gender();
-        goto B;
-    case 5:
-        break;
-    default:
-        cout << "\n\n\t\tInvalid Choice.. Please Try Again..";
-        getch();
-        goto B;
-    }
-}
-
-void covid_management::search_by_aadhar()
-{
     int count = 0;
     string sadhaar;
     ifstream file;
@@ -961,7 +822,7 @@ void covid_management::search_by_aadhar()
     cout << "\n\t\t\t\t*****************************************";
     cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
     cout << "\n\t\t\t\t*****************************************";
-    cout << "\n\n\t\t-->> SEARCH PATIENT DATA BY AADHAR <<--";
+    cout << "\n\n\t\t-->>  PATIENT DATA  <<--";
     cout << "\n\n\t\tEnter Aadhar No.: ";
     cin >> sadhaar;
     if (!file)
@@ -988,124 +849,10 @@ void covid_management::search_by_aadhar()
     file.close();
     cout << "\n\nPress Any Key To Continue..";
     getch();
+
+   
 }
 
-void covid_management::search_by_age()
-{
-    int count = 0;
-    int sage;
-    ifstream file;
-    file.open("Patient_Data.dat", ios::in | ios::binary);
-    system("cls");
-    cout << "\n\t\t\t\t*****************************************";
-    cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
-    cout << "\n\t\t\t\t*****************************************";
-    cout << "\n\n\t\t-->> SEARCH PATIENT DATA BY AGE <<--";
-    cout << "\n\n\t\tEnter Your Age: ";
-    cin >> sage;
-    if (!file)
-    {
-        cout << "\nFile Not Found!";
-    }
-    else
-    {
-        file.read((char *)this, sizeof(covid_management));
-    }
-    while (!file.eof())
-    {
-        if (sage == age)
-        {
-            count++;
-            show_data();
-        }
-        file.read((char *)this, sizeof(covid_management));
-    }
-    if (count == 0)
-    {
-        cout << "\nRecord Not Found!";
-    }
-    file.close();
-    cout << "\n\nPress Any Key To Continue..";
-    getch();
-}
-
-void covid_management::search_by_profession()
-{
-    int count = 0;
-    string sprofession;
-    ifstream file;
-    file.open("Patient_Data.dat", ios::in | ios::binary);
-    system("cls");
-    cout << "\n\t\t\t\t*****************************************";
-    cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
-    cout << "\n\t\t\t\t*****************************************";
-    cout << "\n\n\t\t-->> SEARCH PATIENT DATA BY PROFESSION <<--";
-    cout << "\n\n\t\tEnter Your Profession: ";
-    cin >> sprofession;
-    if (!file)
-    {
-        cout << "\nFile Not Found!";
-    }
-    else
-    {
-        file.read((char *)this, sizeof(covid_management));
-    }
-    while (!file.eof())
-    {
-        if (sprofession.compare(profession) == 0)
-        {
-            count++;
-            show_data();
-        }
-        file.read((char *)this, sizeof(covid_management));
-    }
-    if (count == 0)
-    {
-        cout << "\nRecord Not Found!";
-    }
-    file.close();
-    cout << "\n\nPress Any Key To Continue..";
-    getch();
-}
-
-void covid_management::search_by_gender()
-{
-    int count = 0;
-    char sgender[10];
-    ifstream file;
-    file.open("Patient_Data.dat", ios::in | ios::binary);
-    system("cls");
-    cout << "\n\t\t\t\t*****************************************";
-    cout << "\n\t\t\t\t   *    COVID19 MANAGEMENT SYSTEM    *";
-    cout << "\n\t\t\t\t*****************************************";
-    cout << "\n\n\t\t-->> SEARCH PATIENT DATA BY GENDER <<--";
-    cout << "\n\n\t\tEnter Your Gender: ";
-    cin >> sgender;
-    if (!file)
-    {
-        cout << "\nFile Not Found!";
-    }
-    else
-    {
-        file.read((char *)this, sizeof(covid_management));
-    }
-    while (!file.eof())
-    {
-        if (strcmp(sgender, gender) == 0)
-        {
-            count++;
-            show_data();
-        }
-        file.read((char *)this, sizeof(covid_management));
-    }
-    if (count == 0)
-    {
-        cout << "\nRecord Not Found!";
-    }
-    file.close();
-    cout << "\n\nPress Any Key To Continue..";
-    getch();
-}
 
 //***********USER*************
 
